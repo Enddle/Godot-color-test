@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ball.gd" type="Script" id=1]
+[ext_resource path="res://circle.svg" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
+radius = 100.0
+
+[node name="ball" type="RigidBody2D"]
+input_pickable = true
+collision_layer = 4
+collision_mask = 4
+gravity_scale = 20.0
+custom_integrator = true
+sleeping = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+size = 0.5
+tint = Color( 0.792157, 0.792157, 0.792157, 1 )
+
+[node name="sprite" type="Sprite" parent="."]
+modulate = Color( 0.643137, 0.333333, 0.333333, 1 )
+texture = ExtResource( 2 )
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="notifier" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="notifier" to="." method="_on_notifier_screen_exited"]
